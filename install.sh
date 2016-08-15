@@ -86,16 +86,3 @@ sudo ln -s /usr/bin/nodejs /usr/bin/node
 sudo npm install -g grunt-cli
 echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
 
-# Install dependencies
-# Checks that bower installed properly
-if ! [ -x "$(command -v bower)" ]; then
-    printf "${red}Ooops... Bower did not installed properly${reset}\n"
-else
-    printf "${yellow}Installing bower dependencies${reset}\n"
-    bower install
-fi
-
-# Checks that grunt properly installed
-printf "${red}Ooops... Grunt did not installed properly${reset}\n"
-printf "${yellow}We are now going to install npm dependencies for the project with npm install${reset}\n"
-npm install
