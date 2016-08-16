@@ -48,6 +48,12 @@ printf "${yellow}We are now going to install phpmyadmin${reset}\n"
 # Installing phpmyadmin as it is useful for devs
 sudo apt-get install phpmyadmin
 
+printf "${yellow}We are now going to install firefox developer edition${reset}\n"
+# http://askubuntu.com/questions/548003/how-do-i-install-the-firefox-developer-edition
+sudo add-apt-repository ppa:ubuntu-mozilla-daily/firefox-aurora
+sudo apt-get update
+sudo apt-get install firefox
+
 # Composer bug lack of memory
 # https://getcomposer.org/doc/articles/troubleshooting.md#proc-open-fork-failed-errors
 sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024

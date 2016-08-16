@@ -6,6 +6,7 @@ The installer will install the following:
 * lamp-server
 * php5-curl curl php5-gd php5-cgi php5-intl
 * phpmyadmin
+* Firefox developer edition
 * composer
 * ruby-full
 * compass
