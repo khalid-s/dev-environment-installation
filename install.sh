@@ -23,8 +23,12 @@ sudo chown -R $(whoami):iknsa /var/www
 sudo chgrp -R iknsa /var/www
 
 # Make sure kernel is up to date before getting started
+sudo add-apt-repository ppa:webupd8team/sublime-text-3
 sudo apt-get update --fix-missing
 sudo apt-get upgrade
+
+# Sublimet text 3 installation
+sudo apt-get install sublime-text-installer
 
 # Install lamp-server PHP Apache MySQL
 printf "${yellow}Looks like php is not installed. We'll install the whole lamp-server stack with tasksel${reset}\n"
