@@ -27,9 +27,6 @@ sudo add-apt-repository ppa:webupd8team/sublime-text-3
 sudo apt-get update --fix-missing
 sudo apt-get upgrade
 
-# Sublimet text 3 installation
-sudo apt-get install sublime-text-installer
-
 # Install lamp-server PHP Apache MySQL
 printf "${yellow}Looks like php is not installed. We'll install the whole lamp-server stack with tasksel${reset}\n"
 sudo apt-get install tasksel
