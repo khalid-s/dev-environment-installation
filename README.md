@@ -3,7 +3,6 @@ Dev environment installation
 
 The installer will install the following:
 * tasksel
-* Sublime text 3
 * lamp-server
 * php5-curl curl php5-gd php5-cgi php5-intl
 * phpmyadmin
