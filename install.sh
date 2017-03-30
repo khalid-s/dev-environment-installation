@@ -28,6 +28,23 @@ sudo apt install aptitude -y
 printf "${yellow}Looks like php is not installed. We'll install the whole lamp-server stack with tasksel${reset}\n"
 sudo apt-get install php apache2 mysql-server
 
+# Install mongoDB
+
+# Import the public key used by the package management system
+sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 0C49F3730359A14518585931BC711F9BA15703C6
+# Create a list file for MongoDB
+echo "deb [ arch=amd64,arm64 ] http://repo.mongodb.org/apt/ubuntu xenial/mongodb-org/3.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-3.4.list
+# Reload local package database
+sudo apt-get update -y
+# Install the MongoDB packages
+sudo apt-get install -y mongodb-org
+
+#install mongoDB for php
+sudo pecl install mongo
+
+##Ajoutez la ligne suivante à votre fichier php.ini 
+ echo -e "extension=mongodb.so" | sudo tee /etc/php/7.0/cli/php.ini
+
 # Install ruby
 sudo aptitude install ruby-full -y
 
@@ -47,7 +64,7 @@ sudo aptitude install phpmyadmin -y
 # Composer installation
 printf "${yellow}Composer is not installed globally... We'll try to get it done :)${reset}\n"
 php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
-php -r "if (hash_file('SHA384', 'composer-setup.php') === '55d6ead61b29c7bdee5cccfb50076874187bd9f21f65d8991d46ec5cc90518f447387fb9f76ebae1fbbacf329e583e30') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php -r "if (hash_file('SHA384', 'composer-setup.php') === '669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
 php composer-setup.php
 php -r "unlink('composer-setup.php');"
 sudo mv composer.phar /usr/local/bin/composer
