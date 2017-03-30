@@ -24,9 +24,25 @@ sudo chgrp -R iknsa /var/www
 
 sudo apt install aptitude -y
 
-# Install PHP Apache MySQL
-printf "${yellow}Looks like php is not installed. We'll install the whole lamp-server stack with tasksel${reset}\n"
-sudo apt-get install php apache2 mysql-server
+# Install apache2 
+sudo apt-get update
+sudo apt-get install apache2
+
+# Install mysql
+sudo apt-get install mysql-server -y
+
+# Install php
+sudo apt-get install php libapache2-mod-php php-mcrypt php-mysql
+sudo apt-get install php-cli
+
+sudo systemctl restart apache2
+
+# Active rewrite
+ls -l /usr/lib/apache2/modules/
+sudo a2enmod rewrite
+
+echo "<ifModule mod_rewrite.c> RewriteEngine On </ifModule>" | sudo tee /etc/apache2/apache2.conf
+sudo /etc/init.d/apache2 restart
 
 # Install mongoDB
 
