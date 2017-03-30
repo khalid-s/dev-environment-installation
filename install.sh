@@ -24,10 +24,9 @@ sudo chgrp -R iknsa /var/www
 
 sudo apt install aptitude -y
 
-# Install lamp-server PHP Apache MySQL
+# Install PHP Apache MySQL
 printf "${yellow}Looks like php is not installed. We'll install the whole lamp-server stack with tasksel${reset}\n"
-sudo aptitude install tasksel -y
-sudo tasksel install lamp-server
+sudo apt-get install php apache2 mysql-server
 
 # Install ruby
 sudo aptitude install ruby-full -y
