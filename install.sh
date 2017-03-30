@@ -24,9 +24,6 @@ sudo chgrp -R iknsa /var/www
 
 sudo apt install aptitude -y
 
-# Install PHP Apache MySQL
-printf "${yellow}Looks like php is not installed. We'll install the whole lamp-server stack with tasksel${reset}\n"
-
 # Install apache2 
 sudo apt-get update
 sudo apt-get install apache2
