@@ -22,13 +22,14 @@ sudo usermod -a -G iknsa $(whoami)
 sudo chown -R $(whoami):iknsa /var/www
 sudo chgrp -R iknsa /var/www
 
-# Install lamp-server PHP Apache MySQL
+sudo apt install aptitude -y
+
+# Install PHP Apache MySQL
 printf "${yellow}Looks like php is not installed. We'll install the whole lamp-server stack with tasksel${reset}\n"
-sudo apt-get install tasksel
-sudo tasksel install lamp-server
+sudo apt-get install php apache2 mysql-server
 
 # Install ruby
-sudo apt-get install ruby-full
+sudo aptitude install ruby-full -y
 
 # Install sass and compass
 printf "${yellow}Looks like compass is not installed. We'll install compass using gem install compass${reset}\n"
@@ -36,39 +37,24 @@ sudo gem update
 sudo gem install compass
 
 printf "${green}We are now going to install a few stuffs for php${reset}\n"
-# Install Curl and php5-curl (php5-curl gets enabled automatically)
-# Install php5-cgi to launch install/index.php with params
-sudo apt-get install php5-curl curl php5-gd php5-cgi php5-intl
+# Install php5-curl (php5-curl gets enabled automatically)
+sudo aptitude install curl php-curl php-gd php-cgi php-intl -y
 
 printf "${yellow}We are now going to install phpmyadmin${reset}\n"
 # Installing phpmyadmin as it is useful for devs
-sudo apt-get install phpmyadmin
-
-# Composer bug lack of memory
-# https://getcomposer.org/doc/articles/troubleshooting.md#proc-open-fork-failed-errors
-sudo /bin/dd if=/dev/zero of=/var/swap.1 bs=1M count=1024
-sudo /sbin/mkswap /var/swap.1
-sudo /sbin/swapon /var/swap.1
+sudo aptitude install phpmyadmin -y
 
 # Composer installation
 printf "${yellow}Composer is not installed globally... We'll try to get it done :)${reset}\n"
-curl -sS https://getcomposer.org/installer | php
+php -r "copy('https://getcomposer.org/installer', 'composer-setup.php');"
+php -r "if (hash_file('SHA384', 'composer-setup.php') === '669656bab3166a7aff8a7506b8cb2d1c292f042046c5a994c43155c0be6190fa0355160742ab2e1c88d40d5be660b410') { echo 'Installer verified'; } else { echo 'Installer corrupt'; unlink('composer-setup.php'); } echo PHP_EOL;"
+php composer-setup.php
+php -r "unlink('composer-setup.php');"
 sudo mv composer.phar /usr/local/bin/composer
-
-if ! [ -x "$(command -v unzip)" ]; then
-    printf "${yellow}Unzip is not installed. We'll install it using sudo apt-get install unzip :)${reset}\n"
-    sudo apt-get install unzip
-fi
-
-# npm install bug
-# This is a temporary fix as it will be fixed in npm#2.7
-mkdir -p /home/$(whoami)/tmp
-sudo chmod -R 777 /home/$(whoami)/tmp
-# @todo to remove this hack as it may present a security issue
 
 # Nodejs and npm installation
 printf "${yellow}Looks like npm and nodejs are not installed... We'll give it a shot.${reset}\n"
-sudo apt-get install npm nodejs-legacy
+sudo aptitude install nodejs npm -y
 
 # Grunt and bower install
 printf "${yellow}We are now going to install bower and grunt-cli globally${reset}\n"
@@ -76,9 +62,8 @@ printf "${yellow}We are now going to install bower and grunt-cli globally${reset
 # Install bower if was not installed
 sudo npm install -g bower
 # Symbolic link for bower as sometimes bugs
-sudo ln -s /usr/bin/nodejs /usr/bin/node
+# sudo ln -s /usr/bin/nodejs /usr/bin/node
 
 # Install grunt-cli if was not installed
 sudo npm install -g grunt-cli
-echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p
-
+# echo fs.inotify.max_user_watches=524288 | sudo tee -a /etc/sysctl.conf && sudo sysctl -p

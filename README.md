@@ -32,7 +32,7 @@ Then launch the install bash file
 
 during the installation process set a password equal to 'paris' for MySQL
 
-## This installation process is for first time installation on  fresh ubuntu.
+## This installation process is for first time installation on  fresh ubuntu 16.04x64.
 
 For ease purpose set all passwords to paris. You will be able to change your password later for production.
 
